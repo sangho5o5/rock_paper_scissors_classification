@@ -20,13 +20,14 @@ jobs:
           password: ${{ env.DOCKERHUB_TOKEN }}
   # build and push to docker hub
   build:
+    needs: login
     runs-on: ubuntu-latest
     steps:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ env.DOCKERHUB_USERNAME }}/rps:$(date +%s)
+          tags: ${{ env.DOCKERHUB_USERNAME }}/rps:1.0.0
       #- uses: actions/checkout@v3
       #- name: Build the Docker image
       #  run: docker build . --file Dockerfile --tag $DOCKER_USERNAME/rps:$(date +%s)
